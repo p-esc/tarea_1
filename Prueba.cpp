@@ -14,12 +14,7 @@ Prueba::Prueba(int cantPreguntas) {
 Prueba::~Prueba() {};
 
 void Prueba::agregarPregunta(Pregunta* pregunta) {
-    if (preguntas.size() < this->cantPreguntas) {
         this->preguntas.push_back(pregunta);
-    }
-    else {
-        cout << "La cantidad de preguntas es "<<this->cantPreguntas<<endl;
-    }
 }
 
 void Prueba::actualizarEnunciado(int num) {
@@ -54,36 +49,38 @@ void Prueba::borrarPregunta(int numPregunta) {
 void Prueba::buscarItem(int numPregunta) {
     cout<<"\n======= Pregunta N°"<<numPregunta<<" =======\n";
     preguntas[numPregunta-1]->mostrarPregunta();
+    cout<<"\n============================================\n";
 }
 
 void Prueba::buscarNivel(string nivel) {
     cout<<"\n======= Preguntas de nivel taxonómico "<<nivel<<" =======\n";
-    for (const auto& pregunta : preguntas) {
-        if (pregunta->getNivelTaxonomia() == nivel)
+    for (Pregunta* pregunta : preguntas) {
+        if (pregunta->getNivel() == nivel)
             pregunta->mostrarPregunta();
     }
+    cout<<"\n===========================================================\n";
 }
 
 void Prueba::recalcularId() {
     int nuevoId = 1;
-    for (auto& pregunta : preguntas) {
+    for (Pregunta* pregunta : preguntas) {
         pregunta->setId(nuevoId++);
     }
 }
 
 void Prueba::mostrarPrueba() {
-    cout << "\n========= Mostrando la prueba completa ========="<<endl;
-    for (const auto& pregunta : preguntas) {
+    cout << "\n========= [ Mostrando la prueba completa ] ========="<<endl;
+    for (Pregunta * pregunta : preguntas) {
         pregunta->mostrarPregunta();
         cout<<endl;
     }
     cout<<"Tiempo total de la prueba: "<<this->calcularTiempoTotal()<<" min\n";
-    cout << "=================  Fin prueba =================" << endl;
+    cout << "================= [ Fin prueba ] =================" << endl;
 }
 
 float Prueba::calcularTiempoTotal() {
     float tiempoTotal = 0;
-    for (const auto& pregunta : preguntas) {
+    for (Pregunta * pregunta : preguntas) {
         tiempoTotal += pregunta->getTiempoEstimado();
     }
     return tiempoTotal;

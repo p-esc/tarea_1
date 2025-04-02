@@ -56,17 +56,11 @@ OpcionMultiple::OpcionMultiple(string enunciado, float tiempoEstimado, string ni
     this->tiempoEstimado = tiempoEstimado;
 }
 
-string OpcionMultiple::getNivelTaxonomia() const{
-    return this->nivelTaxonomia;
-}
-
-
 string OpcionMultiple::getRespuestaCorrecta() const {
     char arr[] = {'A', 'B', 'C', 'D'};
     int x = distance(arr, find(arr, arr+3, this->correcta));
     return this->alternativas[x];
 }
-
 
 void OpcionMultiple::setAlternativas(vector<string> nuevasAlternativas) {
     if (nuevasAlternativas.size() == 4) {
@@ -123,8 +117,4 @@ void VerdaderoFalso::mostrarPregunta() const {
     cout<<"Tiempo estimado: "<<this->tiempoEstimado<<" min"<<endl;
     cout<<this->enunciado<<endl;
     cout<< this->getRespuestaCorrecta()<<". "<< this->justificacion<<endl;
-}
-
-string VerdaderoFalso::getNivelTaxonomia() const {
-    return this->nivelTaxonomia;
 }

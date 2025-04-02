@@ -11,13 +11,17 @@ private:
     Prueba* miPrueba;
 
 public:
+    // Create
     Menu(Prueba* miPrueba);
-    void mostrarMenu();
+    ~Menu();
     void agregarPregunta();
-    void actualizarPregunta();
-    void eliminarPregunta();
+    // Retrieve
     void buscarPregunta();
+    void mostrarMenu();
+    // Update
+    void actualizarPregunta();
+    // Delete
+    void eliminarPregunta();
 };
-
 
 #endif //MENU_H

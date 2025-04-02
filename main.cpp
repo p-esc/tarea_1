@@ -1,6 +1,5 @@
 #include <iostream>
 #include <windows.h>
-
 #include "Menu.h"
 #include "Pregunta.h"
 #include "Prueba.h"
@@ -19,9 +18,6 @@ int main() {
     Prueba *p1 = new Prueba(x);
     Menu* menu = new Menu(p1);
     menu->mostrarMenu();
-
-
-
 
     return 0;
 }

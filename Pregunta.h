@@ -19,7 +19,7 @@ protected:
 public:
     Pregunta(string enunciado, float tiempoEstimado, string nivelTaxonomia);
     virtual ~Pregunta();
-
+    // setters y getters
     void setEnunciado(string nuevoEnunciado);
     int getId();
     void setId(int nuevoId);
@@ -27,10 +27,9 @@ public:
     void setNivel(string nuevoNivel);
     float getTiempoEstimado();
     void setTiempoEstimado(float nuevoTiempo);
-
+    // métodos virtuales
     virtual string getRespuestaCorrecta() const = 0;
     virtual void mostrarPregunta() const = 0;
-    virtual string getNivelTaxonomia() const = 0;
 };
 
 
@@ -51,7 +50,6 @@ public:
     vector<string> getAlternativas();
     // mostrar
     void mostrarPregunta() const override;
-    string getNivelTaxonomia() const override;
 };
 
 
@@ -66,7 +64,6 @@ public:
     string getJustificacion();
     string getRespuestaCorrecta() const override;
     void mostrarPregunta() const override;
-    string getNivelTaxonomia() const override;
 };
 
 

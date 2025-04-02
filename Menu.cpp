@@ -42,11 +42,10 @@ void Menu::agregarPregunta() {
     cout << "Tipo de pregunta\n(1) Opción Múltiple\n(2) Verdadero/Falso):\n";
     cin >> tipo;
     cin.ignore();
-
     string enunciado;
     float tiempo;
     string nivel;
-    cout << "Ingrese el enunciado:";
+    cout << "Ingrese el enunciado: ";
     getline(cin, enunciado);
     cout << "Tiempo estimado en minutos: ";
     cin >> tiempo;
@@ -60,8 +59,8 @@ void Menu::agregarPregunta() {
         char alternativas[] = {'A', 'B', 'C', 'D'};
         cout << "Ingrese 4 alternativas:\n";
         cin.ignore();
-        for (int i = 0; i < 4; i++) {
-            cout << "Alternativa " << alternativas[i] << ". ";
+        for (char alternativa : alternativas) {
+            cout << "Alternativa " << alternativa << ". ";
             getline(cin, opcion);
             opciones.push_back(opcion);
         }
