@@ -8,6 +8,7 @@
 #include <vector>
 using namespace std;
 
+
 // Clase base preguntas
 class Pregunta {
 protected:
@@ -20,13 +21,13 @@ public:
     Pregunta(string enunciado, float tiempoEstimado, string nivelTaxonomia);
     virtual ~Pregunta();
     // setters y getters
-    void setEnunciado(string nuevoEnunciado);
     int getId();
     void setId(int nuevoId);
     string getNivel();
     void setNivel(string nuevoNivel);
     float getTiempoEstimado();
     void setTiempoEstimado(float nuevoTiempo);
+    void setEnunciado(string nuevoEnunciado);
     // métodos virtuales
     virtual string getRespuestaCorrecta() const = 0;
     virtual void mostrarPregunta() const = 0;
@@ -40,9 +41,7 @@ private:
     char correcta;
 public:
     // constructor
-    OpcionMultiple(string enunciado, float tiempoEstimado, string nivelTaxonomia, vector<string> alternativas,
-                   char correcta);
-
+    OpcionMultiple(string enunciado, float tiempoEstimado, string nivelTaxonomia, vector<string> alternativas, char correcta);
     // setters y getters
     string getRespuestaCorrecta() const override;
     void setAlternativas(vector<string> nuevasAlternativas);

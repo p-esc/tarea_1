@@ -14,6 +14,7 @@ public:
     // Create
     Menu(Prueba* miPrueba);
     ~Menu();
+
     void agregarPregunta();
     // Retrieve
     void buscarPregunta();

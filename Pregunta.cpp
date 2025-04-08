@@ -81,7 +81,7 @@ vector<string> OpcionMultiple::getAlternativas() {
 
 void OpcionMultiple::mostrarPregunta() const {
     string arr[] = {"A", "B", "C", "D"};
-    cout<<"Pregunta "<<this->id<<endl;
+    cout<<"Pregunta [ "<<this->id<<" ]\n";
     cout<<"Tiempo estimado: "<<this->tiempoEstimado<<" min\n";
     cout<<this->enunciado<<endl;
     for (size_t i = 0; i < alternativas.size(); i++) {

@@ -14,7 +14,7 @@ Menu::Menu(Prueba *miPrueba) {
 void Menu::mostrarMenu() {
     int opcion;
     do {
-        cout << "\n==== MENU ====\n";
+        cout << "============ MENU ============\n";
         cout << "1. Agregar pregunta\n";
         cout << "2. Actualizar pregunta\n";
         cout << "3. Eliminar pregunta\n";
@@ -39,7 +39,7 @@ void Menu::mostrarMenu() {
 
 void Menu::agregarPregunta() {
     int tipo;
-    cout << "Tipo de pregunta\n(1) Opción Múltiple\n(2) Verdadero/Falso):\n";
+    cout << "Tipo de pregunta\n(1) Opción Múltiple\n(2) Verdadero/Falso:\n";
     cin >> tipo;
     cin.ignore();
     string enunciado;
@@ -84,7 +84,7 @@ void Menu::actualizarPregunta() {
     int id, tipo;
     cout << "Ingrese el número de la pregunta a actualizar: ";
     cin >> id;
-    cout<< "¿Qué desea actualizar? \n(1) Enunciado\n(2) Tiempo estimado\n(3) Nivel Taxonómico:"<<endl;
+    cout<< "¿Qué desea actualizar? \n(1) Enunciado\n(2) Tiempo estimado\n(3) Nivel Taxonómico"<<endl;
     cin >> tipo;
     if (tipo == 1) {
         miPrueba->actualizarEnunciado(id);
@@ -102,6 +102,7 @@ void Menu::eliminarPregunta() {
     cout << "Ingrese el número de la pregunta a eliminar: ";
     cin >> id;
     miPrueba->borrarPregunta(id);
+    cout<<"Se ha eliminado la pregunta "<< id;
 }
 
 void Menu::buscarPregunta() {
