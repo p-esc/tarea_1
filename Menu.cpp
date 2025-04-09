@@ -38,7 +38,7 @@ void Menu::agregarPregunta() {
     do {
         int tipo;
         cout << "\nAgregando pregunta:\n";
-        cout << "Seleccione tipo de pregunta\n(1) Opción Múltiple\n(2) Verdadero/Falso:\n";
+        cout << "\nSeleccione tipo de pregunta\n(1) Opción Múltiple\n(2) Verdadero/Falso\n";
         cin >> tipo;
         cin.ignore();
         string enunciado;
@@ -120,7 +120,7 @@ void Menu::eliminarPregunta() {
     else {
         miPrueba->borrarPregunta(id);
         cout<<"Se ha eliminado la pregunta "<< id;
-        cout<<"\nSe han actualizado los números de las preguntas restantes";
+        cout<<"\nSe han actualizado los números de las preguntas restantes\n";
     }
 }
 

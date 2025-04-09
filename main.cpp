@@ -12,7 +12,7 @@ int main() {
     SetConsoleOutputCP(65001);
 
     int x;
-    cout<<"¿Cuántas preguntas tendrá la prueba? \n";
+    cout<<"¿Cuántas preguntas tendrá la prueba?  ";
     cin>> x;
     Prueba *p1 = new Prueba(x);
     Menu* menu = new Menu(p1);
