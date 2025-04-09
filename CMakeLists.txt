@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 20)
 add_executable(tarea_1 main.cpp
         Pregunta.cpp
         Pregunta.h
-        menu.cpp
-        menu.h
-        prueba.cpp
-        prueba.h)
+        Menu.cpp
+        Menu.h
+        Prueba.cpp
+        Prueba.h)
