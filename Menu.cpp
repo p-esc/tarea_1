@@ -14,70 +14,73 @@ Menu::Menu(Prueba *miPrueba) {
 void Menu::mostrarMenu() {
     int opcion;
     do {
-        cout << "============ MENU ============\n";
-        cout << "1. Agregar pregunta\n";
-        cout << "2. Actualizar pregunta\n";
-        cout << "3. Eliminar pregunta\n";
-        cout << "4. Buscar pregunta\n";
-        cout << "5. Mostrar prueba completa\n";
-        cout << "6. Salir\n";
+        cout << "\n============ MENU ============\n";
+        cout << "(1) Actualizar pregunta\n";
+        cout << "(2) Eliminar pregunta\n";
+        cout << "(3) Buscar pregunta\n";
+        cout << "(4) Mostrar prueba completa\n";
+        cout << "(5) Salir\n";
         cout << "Seleccione una opción: ";
         cin >> opcion;
-        cin.ignore();
-
+        cout << "-----------------------------------\n";
         switch (opcion) {
-            case 1: this->agregarPregunta(); break;
-            case 2: this->actualizarPregunta(); break;
-            case 3: this->eliminarPregunta(); break;
-            case 4: this->buscarPregunta(); break;
-            case 5: miPrueba->mostrarPrueba(); break;
-            case 6: cout << "Saliendo del programa...\n"; break;
+            case 1: this->actualizarPregunta(); break;
+            case 2: this->eliminarPregunta(); break;
+            case 3: this->buscarPregunta(); break;
+            case 4: miPrueba->mostrarPrueba(); break;
+            case 5: cout << "Saliendo del programa\n"; break;
             default: cout << "Opción inválida. Intente de nuevo.\n";
         }
-    } while (opcion != 6);
+    } while (opcion != 5);
 }
 
 void Menu::agregarPregunta() {
-    int tipo;
-    cout << "Tipo de pregunta\n(1) Opción Múltiple\n(2) Verdadero/Falso:\n";
-    cin >> tipo;
-    cin.ignore();
-    string enunciado;
-    float tiempo;
-    string nivel;
-    cout << "Ingrese el enunciado: ";
-    getline(cin, enunciado);
-    cout << "Tiempo estimado en minutos: ";
-    cin >> tiempo;
-    cout << "Nivel de taxonomía:";
-    cin >> nivel;
-
-    if (tipo == 1) {
-        vector<string> opciones;
-        string opcion;
-        char correcta;
-        char alternativas[] = {'A', 'B', 'C', 'D'};
-        cout << "Ingrese 4 alternativas:\n";
+    do {
+        int tipo;
+        cout << "Agregando pregunta:\n";
+        cout << "Seleccione tipo de pregunta\n(1) Opción Múltiple\n(2) Verdadero/Falso:\n";
+        cin >> tipo;
         cin.ignore();
-        for (char alternativa : alternativas) {
-            cout << "Alternativa " << alternativa << ". ";
-            getline(cin, opcion);
-            opciones.push_back(opcion);
+        string enunciado;
+        float tiempo;
+        int nivel;
+        cout << "Ingrese el enunciado: ";
+        getline(cin, enunciado);
+        cout << "Tiempo estimado en minutos: ";
+        cin >> tiempo;
+        cout << "Nivel de taxonomía:\n(1) Recordar\n(2) Entender\n(3) Aplicar\n(4) Analizar\n(5) Evaluar\n(6) Crear\n";
+        cin >> nivel;
+        while (nivel < 1 || nivel > 6 ) {
+            cout<<"Ingrese un número válido\n";
+            cout<< "Nivel de taxonomía:\n(1) Recordar\n(2) Entender\n(3) Aplicar\n(4) Analizar\n(5) Evaluar\n(6) Crear\n";
+            cin >> nivel;
         }
-        cout << "Ingrese la letra de la alternativa correcta (A, B, C, D): ";
-        cin >> correcta;
-        miPrueba->agregarPregunta(new OpcionMultiple(enunciado, tiempo, nivel, opciones, correcta));
-    }
-    else if (tipo == 2) {
-        bool correcta;
-        string justificacion;
-        cout << "¿Es verdadero (1) o falso (0)?: ";
-        cin >>correcta;
-        cout << "Ingrese la justificacion: ";
-        cin.ignore();
-        getline(cin, justificacion);
-        miPrueba->agregarPregunta(new VerdaderoFalso(enunciado, tiempo, nivel, justificacion, correcta));
-    }
+        if (tipo == 1) {
+            vector<string> opciones;
+            string opcion;
+            char correcta;
+            char alternativas[] = {'A', 'B', 'C', 'D'};
+            cout << "Ingrese 4 alternativas:\n";
+            cin.ignore();
+            for (char alternativa: alternativas) {
+                cout << "Alternativa " << alternativa << ". ";
+                getline(cin, opcion);
+                opciones.push_back(opcion);
+            }
+            cout << "Ingrese la letra de la alternativa correcta (A, B, C, D): ";
+            cin >> correcta;
+            miPrueba->agregarPregunta(new OpcionMultiple(enunciado, tiempo, nivel, opciones, tolower(correcta)));
+        } else if (tipo == 2) {
+            bool correcta;
+            string justificacion;
+            cout << "¿Es verdadero (1) o falso (0)?: ";
+            cin >> correcta;
+            cin.ignore();
+            cout << "Ingrese la justificacion: ";
+            getline(cin, justificacion);
+            miPrueba->agregarPregunta(new VerdaderoFalso(enunciado, tiempo, nivel, justificacion, correcta));
+        }
+    }while (miPrueba->getLargoVector() < miPrueba->getCantPreg());
 }
 
 void Menu::actualizarPregunta() {
@@ -107,11 +110,11 @@ void Menu::eliminarPregunta() {
 
 void Menu::buscarPregunta() {
     int valor, tipo;
-    string nivel;
+    int nivel;
     cout<< "¿Por qué desea buscar? \n(1) Nivel taxonómico\n(2) N° de pregunta"<<endl;
     cin >> tipo;
     if (tipo == 1) {
-        cout<<"¿Qué nivel quiere buscar?"<<endl;
+        cout<<"¿Qué nivel quiere buscar?\n(1) Recordar\n(2) Entender\n(3) Aplicar\n(4) Analizar\n(5) Evaluar\n(6) Crear\n";
         cin>>nivel;
         miPrueba->buscarNivel(nivel);
     }

@@ -14,17 +14,18 @@ class Pregunta {
 protected:
     string enunciado;
     float tiempoEstimado;
-    string nivelTaxonomia;
+    int nivelTaxonomia;
     static int contadorId;
     int id;
 public:
-    Pregunta(string enunciado, float tiempoEstimado, string nivelTaxonomia);
+    Pregunta(string enunciado, float tiempoEstimado, int nivelTaxonomia);
     virtual ~Pregunta();
     // setters y getters
     int getId();
     void setId(int nuevoId);
-    string getNivel();
-    void setNivel(string nuevoNivel);
+    string getNivelPalabra() const;
+    int getNivel();
+    void setNivel(int nivel);
     float getTiempoEstimado();
     void setTiempoEstimado(float nuevoTiempo);
     void setEnunciado(string nuevoEnunciado);
@@ -41,7 +42,7 @@ private:
     char correcta;
 public:
     // constructor
-    OpcionMultiple(string enunciado, float tiempoEstimado, string nivelTaxonomia, vector<string> alternativas, char correcta);
+    OpcionMultiple(string enunciado, float tiempoEstimado, int nivelTaxonomia, vector<string> alternativas, char correcta);
     // setters y getters
     string getRespuestaCorrecta() const override;
     void setAlternativas(vector<string> nuevasAlternativas);
@@ -58,7 +59,7 @@ private:
     string justificacion;
     bool respuestaCorrecta;
 public:
-    VerdaderoFalso(string enunciado, float tiempoEstimado, string nivelTaxonomia, string justificacion, bool respuestaCorrecta);
+    VerdaderoFalso(string enunciado, float tiempoEstimado, int nivelTaxonomia, string justificacion, bool respuestaCorrecta);
     void setJustificacion(string nuevaJustificacion);
     string getJustificacion();
     string getRespuestaCorrecta() const override;

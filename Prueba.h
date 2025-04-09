@@ -14,7 +14,6 @@ class Prueba {
 private:
     int cantPreguntas;
     vector<Pregunta*> preguntas;
-    float tiempoTotal;
 public:
     Prueba(int cantPreguntas);
     ~Prueba();
@@ -29,9 +28,11 @@ public:
     void recalcularId();
     // Retreive
     void buscarItem(int numPregunta);
-    void buscarNivel(string nivel);
+    void buscarNivel(int nivel);
     float calcularTiempoTotal();
     void mostrarPrueba();
+    int getCantPreg();
+    int getLargoVector();
 };
 
 

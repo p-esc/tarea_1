@@ -26,8 +26,9 @@ void Prueba::actualizarEnunciado(int num) {
 }
 
 void Prueba::actualizarNivel(int num) {
-    string nuevoNivel;
+    int nuevoNivel;
     cout<<"¿Cuál es el nuevo nivel taxonómico para la pregunta "<< num <<"?"<< endl;
+    cout<<"(1) Recordar\n(2) Entender\n(3) Aplicar\n(4) Analizar\n(5) Evaluar\n(6) Crear\n";
     cin>>nuevoNivel;
     preguntas[num-1]->setNivel(nuevoNivel);
 }
@@ -52,7 +53,7 @@ void Prueba::buscarItem(int numPregunta) {
     cout<<"\n============================================\n";
 }
 
-void Prueba::buscarNivel(string nivel) {
+void Prueba::buscarNivel(int nivel) {
     cout<<"\n======= Preguntas de nivel taxonómico "<<nivel<<" =======\n";
     for (Pregunta* pregunta : preguntas) {
         if (pregunta->getNivel() == nivel)
@@ -84,4 +85,12 @@ float Prueba::calcularTiempoTotal() {
         tiempoTotal += pregunta->getTiempoEstimado();
     }
     return tiempoTotal;
+}
+
+int Prueba::getCantPreg() {
+    return this->cantPreguntas;
+}
+
+int Prueba::getLargoVector() {
+    return this->preguntas.size();
 }

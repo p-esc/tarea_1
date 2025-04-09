@@ -8,7 +8,7 @@
 
 int Pregunta::contadorId = 1;
 
-Pregunta::Pregunta(string enunciado, float tiempoEstimado, string nivelTaxonomia) {
+Pregunta::Pregunta(string enunciado, float tiempoEstimado, int nivelTaxonomia) {
     this->enunciado = enunciado;
     this->tiempoEstimado = tiempoEstimado;
     this->nivelTaxonomia = nivelTaxonomia;
@@ -29,12 +29,18 @@ int Pregunta::getId() {
     return this->id;
 }
 
-string Pregunta::getNivel() {
+string Pregunta::getNivelPalabra() const {
+    string niveles[] = {"Recordar", "Entender", "Aplicar", "Analizar", "Evaluar", "Crear"};
+    return niveles[this->nivelTaxonomia-1];
+}
+
+int Pregunta::getNivel() {
     return this->nivelTaxonomia;
 }
 
-void Pregunta::setNivel(string nuevoNivel) {
-    this->nivelTaxonomia = nuevoNivel;
+void Pregunta::setNivel(int nivel) {
+    if (nivel < 1 || nivel > 6 )
+        this->nivelTaxonomia = nivel;
 }
 
 float Pregunta::getTiempoEstimado() {
@@ -48,7 +54,7 @@ void Pregunta::setTiempoEstimado(float nuevoTiempo) {
 
 // ------------------------------------------
 // Opcion Multiple
-OpcionMultiple::OpcionMultiple(string enunciado, float tiempoEstimado, string nivelTaxonomia, vector<string> alternativas, char correcta) : Pregunta(enunciado, tiempoEstimado,nivelTaxonomia) {
+OpcionMultiple::OpcionMultiple(string enunciado, float tiempoEstimado, int nivelTaxonomia, vector<string> alternativas, char correcta) : Pregunta(enunciado, tiempoEstimado,nivelTaxonomia) {
     this->alternativas = alternativas;
     this->correcta = correcta;
     this->nivelTaxonomia = nivelTaxonomia;
@@ -57,7 +63,7 @@ OpcionMultiple::OpcionMultiple(string enunciado, float tiempoEstimado, string ni
 }
 
 string OpcionMultiple::getRespuestaCorrecta() const {
-    char arr[] = {'A', 'B', 'C', 'D'};
+    char arr[] = {'a', 'b', 'c', 'd'};
     int x = distance(arr, find(arr, arr+3, this->correcta));
     return this->alternativas[x];
 }
@@ -72,7 +78,7 @@ void OpcionMultiple::setCorrecta() {
     char nuevaCorrecta;
     cout << "Ingrese la alternativa de la respuesta correcta: " << endl;
     cin >> nuevaCorrecta;
-    this->correcta = nuevaCorrecta;
+    this->correcta = tolower(nuevaCorrecta);
 }
 
 vector<string> OpcionMultiple::getAlternativas() {
@@ -81,8 +87,9 @@ vector<string> OpcionMultiple::getAlternativas() {
 
 void OpcionMultiple::mostrarPregunta() const {
     string arr[] = {"A", "B", "C", "D"};
-    cout<<"Pregunta [ "<<this->id<<" ]\n";
+    cout<<"Pregunta ("<<this->id<<")\n";
     cout<<"Tiempo estimado: "<<this->tiempoEstimado<<" min\n";
+    cout<<"Nivel taxonómico: "<<this->getNivelPalabra()<<endl;
     cout<<this->enunciado<<endl;
     for (size_t i = 0; i < alternativas.size(); i++) {
         cout << arr[i] << ". " << alternativas[i] << endl;
@@ -92,7 +99,7 @@ void OpcionMultiple::mostrarPregunta() const {
 
 // ---------------------------------------------------------------
 // Verdadero o Falso
-VerdaderoFalso::VerdaderoFalso(string enunciado, float tiempoEstimado, string nivelTaxonomia, string justificacion, bool respuestaCorrecta) : Pregunta(enunciado, tiempoEstimado, nivelTaxonomia) {
+VerdaderoFalso::VerdaderoFalso(string enunciado, float tiempoEstimado, int nivelTaxonomia, string justificacion, bool respuestaCorrecta) : Pregunta(enunciado, tiempoEstimado, nivelTaxonomia) {
     this->enunciado = enunciado;
     this->tiempoEstimado = tiempoEstimado;
     this->nivelTaxonomia = nivelTaxonomia;
@@ -113,8 +120,9 @@ string VerdaderoFalso::getRespuestaCorrecta() const{
 }
 
 void VerdaderoFalso::mostrarPregunta() const {
-    cout<<"Pregunta "<<this->id<<endl;
+    cout<<"Pregunta ("<<this->id<<")"<<endl;
     cout<<"Tiempo estimado: "<<this->tiempoEstimado<<" min"<<endl;
+    cout<<"Nivel taxonómico: "<<this->getNivelPalabra()<<endl;
     cout<<this->enunciado<<endl;
     cout<< this->getRespuestaCorrecta()<<". "<< this->justificacion<<endl;
 }
