@@ -26,8 +26,9 @@ void Prueba::actualizarEnunciado(int num) {
 }
 
 void Prueba::actualizarNivel(int num) {
-    string nuevoNivel;
+    int nuevoNivel;
     cout<<"¿Cuál es el nuevo nivel taxonómico para la pregunta "<< num <<"?"<< endl;
+    cout<<"(1) Recordar\n(2) Entender\n(3) Aplicar\n(4) Analizar\n(5) Evaluar\n(6) Crear\n";
     cin>>nuevoNivel;
     preguntas[num-1]->setNivel(nuevoNivel);
 }
@@ -47,18 +48,21 @@ void Prueba::borrarPregunta(int numPregunta) {
 }
 
 void Prueba::buscarItem(int numPregunta) {
-    cout<<"\n======= Pregunta N°"<<numPregunta<<" =======\n";
+    cout<<"\n=================== Pregunta N°"<<numPregunta<<" ===================\n";
     preguntas[numPregunta-1]->mostrarPregunta();
-    cout<<"\n============================================\n";
+    cout<<endl;
+    cout<<"====================================================\n";
 }
 
-void Prueba::buscarNivel(string nivel) {
-    cout<<"\n======= Preguntas de nivel taxonómico "<<nivel<<" =======\n";
+void Prueba::buscarNivel(int nivel) {
+    cout<<"\n========= Preguntas de nivel taxonómico "<<nivel<<" =========\n";
     for (Pregunta* pregunta : preguntas) {
-        if (pregunta->getNivel() == nivel)
+        if (pregunta->getNivel() == nivel) {
             pregunta->mostrarPregunta();
+            cout<<endl;
+        }
     }
-    cout<<"\n===========================================================\n";
+    cout<<"====================================================\n";
 }
 
 void Prueba::recalcularId() {
@@ -75,7 +79,7 @@ void Prueba::mostrarPrueba() {
         cout<<endl;
     }
     cout<<"Tiempo total de la prueba: "<<this->calcularTiempoTotal()<<" min\n";
-    cout << "================= [ Fin prueba ] =================" << endl;
+    cout << "================= [ Fin prueba ] ===================" << endl;
 }
 
 float Prueba::calcularTiempoTotal() {
@@ -84,4 +88,12 @@ float Prueba::calcularTiempoTotal() {
         tiempoTotal += pregunta->getTiempoEstimado();
     }
     return tiempoTotal;
+}
+
+int Prueba::getCantPreg() {
+    return this->cantPreguntas;
+}
+
+int Prueba::getLargoVector() {
+    return this->preguntas.size();
 }

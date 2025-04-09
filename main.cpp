@@ -16,6 +16,7 @@ int main() {
     cin>> x;
     Prueba *p1 = new Prueba(x);
     Menu* menu = new Menu(p1);
+    menu->agregarPregunta();
     menu->mostrarMenu();
 
     return 0;
