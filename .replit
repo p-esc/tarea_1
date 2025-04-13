@@ -2,3 +2,23 @@ modules = ["cpp-clang14"]
 
 [nix]
 channel = "stable-24_05"
+
+[workflows]
+runButton = "C++ Runner"
+
+[[workflows.workflow]]
+name = "C++ Runner"
+author = 23018386
+mode = "sequential"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "clear"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "g++ -std=c++20 *.cpp -o main"
+
+[[workflows.workflow.tasks]]
+task = "shell.exec"
+args = "./main"
