@@ -1,59 +1,54 @@
 //
-// Created by polae on 4/1/2025.
+// Created by polae on 1/4/2025.
 //
 
 #include "Pregunta.h"
 #include <iostream>
 #include <algorithm>
-
+// inicializar el contador de ID en 1
 int Pregunta::contadorId = 1;
-
+// constructor de la clase Pregunta
 Pregunta::Pregunta(string enunciado, float tiempoEstimado, int nivelTaxonomia) {
     this->enunciado = enunciado;
     this->tiempoEstimado = tiempoEstimado;
     this->nivelTaxonomia = nivelTaxonomia;
     this->id = contadorId++;
 }
-
+// destructor de la clase Pregunta
 Pregunta::~Pregunta() {}
-
+// cambiar el enunciado de la pregunta por uno nuevo
 void Pregunta::setEnunciado(string nuevoEnunciado) {
     this->enunciado = nuevoEnunciado;
 }
-
+// cambiar el ID de la pregunta por uno nuevo
 void Pregunta::setId (int nuevoId) {
     this->id = nuevoId;
 }
-
-int Pregunta::getId() {
-    return this->id;
-}
-
+// obtener el nivel taxonómico de la pregunta en formato de palabra
 string Pregunta::getNivelPalabra() const {
     string niveles[] = {"Recordar", "Entender", "Aplicar", "Analizar", "Evaluar", "Crear"};
     return niveles[this->nivelTaxonomia-1];
 }
-
+// obtener el nivel taxonómico de la pregunta en formato de número
 int Pregunta::getNivel() {
     return this->nivelTaxonomia;
 }
-
+// cambiar el nivel taxonómico de la pregunta por uno nuevo (número)
 void Pregunta::setNivel(int nivel) {
     if (nivel > 0 && nivel < 7 )
         this->nivelTaxonomia = nivel;
 }
-
+// obtener el tiempo estimado de la pregunta
 float Pregunta::getTiempoEstimado() {
     return this->tiempoEstimado;
 }
-
+// cambiar el tiempo estimado de la pregunta por uno nuevo
 void Pregunta::setTiempoEstimado(float nuevoTiempo) {
     this->tiempoEstimado = nuevoTiempo;
 }
-
-
-// ------------------------------------------
+// ---------------------------------------------------------------
 // Opcion Multiple
+// constructor de la clase OpcionMultiple
 OpcionMultiple::OpcionMultiple(string enunciado, float tiempoEstimado, int nivelTaxonomia, vector<string> alternativas, char correcta) : Pregunta(enunciado, tiempoEstimado,nivelTaxonomia) {
     this->alternativas = alternativas;
     this->correcta = correcta;
@@ -61,34 +56,14 @@ OpcionMultiple::OpcionMultiple(string enunciado, float tiempoEstimado, int nivel
     this->enunciado = enunciado;
     this->tiempoEstimado = tiempoEstimado;
 }
-
+// obtener la respuesta correcta de la pregunta de opción múltiple
+// (busca la letra en el array de alternativas)
 string OpcionMultiple::getRespuestaCorrecta() const {
     char arr[] = {'a', 'b', 'c', 'd'};
     int x = distance(arr, find(arr, arr+3, this->correcta));
     return this->alternativas[x];
 }
-
-void OpcionMultiple::setAlternativas(vector<string> nuevasAlternativas) {
-    if (nuevasAlternativas.size() == 4) {
-        this->alternativas = nuevasAlternativas;
-    }
-}
-
-void OpcionMultiple::setCorrecta() {
-    char nuevaCorrecta;
-    char alternativas[] = {'a', 'b', 'c', 'd'};
-    do {
-        cout << "Ingrese la alternativa de la respuesta correcta: " << endl;
-        cin >> nuevaCorrecta;
-        this->correcta = tolower(nuevaCorrecta);
-        if (find(alternativas, alternativas + 4, this->correcta) == alternativas + 4) { cout << "No existe esa alternativa. Ingrese otra opción\n"; }
-    } while (find(alternativas, alternativas + 4, this->correcta) == alternativas + 4);
-}
-
-vector<string> OpcionMultiple::getAlternativas() {
-    return this->alternativas;
-}
-
+// mostrar la pregunta de opción múltiple
 void OpcionMultiple::mostrarPregunta() const {
     string arr[] = {"A", "B", "C", "D"};
     cout<<"Pregunta ("<<this->id<<")\n";
@@ -100,9 +75,9 @@ void OpcionMultiple::mostrarPregunta() const {
     }
     cout<<"Correcta: "<<this->getRespuestaCorrecta()<<endl;
 }
-
 // ---------------------------------------------------------------
 // Verdadero o Falso
+// constructor de la clase VerdaderoFalso
 VerdaderoFalso::VerdaderoFalso(string enunciado, float tiempoEstimado, int nivelTaxonomia, string justificacion, bool respuestaCorrecta) : Pregunta(enunciado, tiempoEstimado, nivelTaxonomia) {
     this->enunciado = enunciado;
     this->tiempoEstimado = tiempoEstimado;
@@ -110,19 +85,11 @@ VerdaderoFalso::VerdaderoFalso(string enunciado, float tiempoEstimado, int nivel
     this->justificacion = justificacion;
     this->respuestaCorrecta = respuestaCorrecta;
 }
-
-void VerdaderoFalso::setJustificacion(string nuevaJustificacion) {
-    this->justificacion = nuevaJustificacion;
-}
-
-string VerdaderoFalso::getJustificacion() {
-    return this->justificacion;
-}
-
+// obtener la respuesta correcta de la pregunta verdadero/falso en formato de palabra
 string VerdaderoFalso::getRespuestaCorrecta() const{
     return this->respuestaCorrecta ? "Verdadero" : "Falso";
 }
-
+// mostrar la pregunta verdadero/falso
 void VerdaderoFalso::mostrarPregunta() const {
     cout<<"Pregunta ("<<this->id<<")"<<endl;
     cout<<"Tiempo estimado: "<<this->tiempoEstimado<<" min"<<endl;

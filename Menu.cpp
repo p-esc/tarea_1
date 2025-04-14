@@ -1,17 +1,13 @@
-//
-// Created by polae on 4/1/2025.
-//
-
 #include "Menu.h"
 #include <iostream>
 #include <string>
 #include <algorithm>
 using namespace std;
-
+// constructor de la clase Menu que recibe un objeto Prueba
 Menu::Menu(Prueba *miPrueba) {
     this->miPrueba = miPrueba;
 }
-
+// mostrar el menú de opciones y ejecutar la opción seleccionada
 void Menu::mostrarMenu() {
     int opcion;
     do {
@@ -34,7 +30,8 @@ void Menu::mostrarMenu() {
         }
     } while (opcion != 5);
 }
-
+// agregar preguntas a la prueba hasta que se complete la cantidad definida
+// se pregunta si es opción múltiple o verdadero/falso y se piden los datos correspondientes
 void Menu::agregarPregunta() {
     do {
         int tipo;
@@ -81,7 +78,8 @@ void Menu::agregarPregunta() {
         }
     }while (miPrueba->getLargoVector() < miPrueba->getCantPreg());
 }
-
+// actualizar una pregunta específica por su número y el tipo de dato a actualizar
+// se pregunta si se quiere actualizar el enunciado, el tiempo estimado o el nivel taxonómico
 void Menu::actualizarPregunta() {
     int id, tipo;
     cout << "Ingrese el número de la pregunta a actualizar: ";
@@ -108,7 +106,7 @@ void Menu::actualizarPregunta() {
         }
     }
 }
-
+// eliminar una pregunta específica por su número y recalcular los IDs de las preguntas restantes
 void Menu::eliminarPregunta() {
     int id;
     cout << "Ingrese el número de la pregunta a eliminar: ";
@@ -122,14 +120,14 @@ void Menu::eliminarPregunta() {
         cout<<"\nSe han actualizado los números de las preguntas restantes\n";
     }
 }
-
+// buscar una pregunta específica por su número o por su nivel taxonómico
 void Menu::buscarPregunta() {
     int valor, tipo;
     int nivel;
     cout<< "¿Por qué desea buscar?\n(1) Nivel taxonómico\n(2) N° de pregunta"<<endl;
     cin >> tipo;
     if (tipo == 1) {
-        cout<<"¿Qué nivel quiere buscar?\n(1) Recordar\n(2) Entender\n(3) Aplicar\n(4) Analizar\n(5) Evaluar\n(6) Crear\n";
+        cout << "Nivel de taxonomía:\n(1) Recordar    (2) Entender\n(3) Aplicar     (4) Analizar\n(5) Evaluar     (6) Crear\n";
         cin>>nivel;
         if (nivel < 1 || nivel > 6) {
             cout<<"\nNo existe ese nivel taxonómico\n";
